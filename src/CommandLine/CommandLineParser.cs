@@ -27,6 +27,9 @@ public class CommandLineParser
         [Option("ps", Required = false, HelpText = "Print playlist songs")]
         public string? PlaylistSongs { get; set; }
 
+        [Option("play", Required = false, HelpText = "Play playlist <playlist name>")]
+        public string? PlayPlaylist { get; set; }
+
     }
     public CommandLineParser(string[] args) => Parse(args);
 
@@ -43,6 +46,8 @@ public class CommandLineParser
 
             if (o.PlaylistsList) FilesManager.PlaylistsNames.ToList().ForEach(x => Console.WriteLine(x));
             if (o.PlaylistSongs != null) FilesManager.PlaylistSongs(o.PlaylistSongs.ToString()).ToList().ForEach(x => Console.WriteLine(x));
+
+            if (o.PlayPlaylist != null) new Playlist(o.PlayPlaylist);
         });
     }
 }

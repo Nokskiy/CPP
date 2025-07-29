@@ -4,7 +4,7 @@ namespace PP.PlaylistPlayer;
 
 public static class FilesManager
 {
-    private static string ProgramFilesPath => Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".PlaylistsPlayer")).ToString();
+    private static string ProgramFilesPath => Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".ConsolePlaylistsPlayer")).ToString();
     public static string PathToPlaylist(string playlistName) => Path.Combine(ProgramFilesPath, $"{playlistName}.json");
 
     public static void CreatePlaylist(string playlistName) => File.Create(PathToPlaylist(playlistName));
@@ -66,7 +66,6 @@ public static class FilesManager
     {
         foreach (var playlistName in PlaylistsNames)
         {
-            Console.WriteLine(playlistName);
             var playlist = GetPlaylistData(playlistName);
             foreach (var songPath in playlist.SongsPaths)
                 if (!File.Exists(songPath))
