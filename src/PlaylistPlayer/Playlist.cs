@@ -2,7 +2,7 @@ namespace PP.PlaylistPlayer;
 
 public class Playlist
 {
-    private string _lastSongPath = null!;
+    private List<string> songsPaths = new List<string>();
     public Playlist(string playlistName)
     {
         PlayLoopingPlaylist(playlistName);
@@ -12,13 +12,11 @@ public class Playlist
     {
         while (true)
         {
-            List<string> songsPaths = FilesManager.GetPlaylistData(playlistName).SongsPaths;
-
-            songsPaths.Remove(_lastSongPath);
+            songsPaths = songsPaths.Count == 0 ? FilesManager.GetPlaylistData(playlistName).SongsPaths : songsPaths;
 
             string randomSongPath = songsPaths[new Random().Next(songsPaths.ToArray().Length)];
 
-            _lastSongPath = randomSongPath;
+            songsPaths.Remove(randomSongPath);
 
             new MediaPlayer(randomSongPath);
         }

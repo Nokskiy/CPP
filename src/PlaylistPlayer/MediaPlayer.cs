@@ -20,7 +20,6 @@ public class MediaPlayer
             Console.WriteLine($"{songPath} is invalid");
         }
 
-
         FilesManager.RemoveAllRemovedSongs();
     }
 }
