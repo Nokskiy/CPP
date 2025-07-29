@@ -22,6 +22,22 @@ public static class FilesManager
         playlistData.AddSong(songPath);
         File.WriteAllText(PathToPlaylist(playlistName), JsonConvert.SerializeObject(playlistData, Formatting.Indented));
     }
+    public static void AddFolderToPlaylist(string playlistName, string folderPath)
+    {
+        if (!Directory.Exists(folderPath))
+        {
+            Console.WriteLine($"Folder with path {folderPath} not exists");
+            Environment.Exit(1);
+        }
+
+        Console.WriteLine(folderPath);
+        var playlistData = GetPlaylistData(playlistName);
+        foreach (var i in Directory.GetFiles(folderPath))
+            playlistData.AddSong(i);
+
+
+        File.WriteAllText(PathToPlaylist(playlistName), JsonConvert.SerializeObject(playlistData, Formatting.Indented));
+    }
     public static void RemoveSongFromPlaylist(string playlistName, string songPath)
     {
         var playlistData = GetPlaylistData(playlistName);

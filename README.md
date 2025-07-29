@@ -23,6 +23,8 @@ type ```cpp --help``` in console to get help menu for commands
 
 - --as         Add song to playlist <Playlist name> <Song path>
 
+- --af         Add folder to playlist <Playlist name> <Folder path>
+
 - --rs         Remove song from playlist <Playlist name> <Song path>
 
 - --pl         Print playlists list

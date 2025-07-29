@@ -17,6 +17,9 @@ public class CommandLineParser
         [Option("as", Required = false, HelpText = "Add song to playlist <Playlist name> <Song path>")]
         public IEnumerable<string>? AddSongToPlaylist { get; set; }
 
+        [Option("af", Required = false, HelpText = "Add song to playlist <Playlist name> <Folder path>")]
+        public IEnumerable<string>? AddFolderToPlaylist { get; set; }
+
         [Option("rs", Required = false, HelpText = "Remove song from playlist <Playlist name> <Song path>")]
         public IEnumerable<string>? RemoveSongFromPlaylist { get; set; }
 
@@ -42,6 +45,7 @@ public class CommandLineParser
             if (o.RemovePlaylist != null) FilesManager.RemovePlaylist(o.RemovePlaylist);
 
             if (o.AddSongToPlaylist?.ToArray().Length == 2) FilesManager.AddSongToPlaylist(o.AddSongToPlaylist.ToArray()[0], o.AddSongToPlaylist.ToArray()[1]);
+            if (o.AddFolderToPlaylist?.ToArray().Length == 2) FilesManager.AddFolderToPlaylist(o.AddFolderToPlaylist.ToArray()[0], o.AddFolderToPlaylist.ToArray()[1]);
             if (o.RemoveSongFromPlaylist?.ToArray().Length == 2) FilesManager.RemoveSongFromPlaylist(o.RemoveSongFromPlaylist.ToArray()[0], o.RemoveSongFromPlaylist.ToArray()[1]);
 
             if (o.PlaylistsList) FilesManager.PlaylistsNames.ToList().ForEach(x => Console.WriteLine(x));

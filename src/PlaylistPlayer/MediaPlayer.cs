@@ -5,13 +5,21 @@ public class MediaPlayer
 {
     public MediaPlayer(string songPath)
     {
-        using (var audioFile = new AudioFileReader(songPath))
-        using (var outputDevice = new WaveOutEvent())
+        try
         {
-            outputDevice.Init(audioFile);
-            outputDevice.Play();
-            while (outputDevice.PlaybackState == PlaybackState.Playing) Thread.Sleep(1000);
+            using (var audioFile = new AudioFileReader(songPath))
+            using (var outputDevice = new WaveOutEvent())
+            {
+                outputDevice.Init(audioFile);
+                outputDevice.Play();
+                while (outputDevice.PlaybackState == PlaybackState.Playing) Thread.Sleep(1000);
+            }
         }
+        catch
+        {
+            Console.WriteLine($"{songPath} is invalid");
+        }
+
 
         FilesManager.RemoveAllRemovedSongs();
     }
