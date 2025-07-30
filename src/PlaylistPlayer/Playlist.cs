@@ -18,6 +18,8 @@ public class Playlist
 
             songsPaths.Remove(randomSongPath);
 
+            Console.WriteLine($"Now playing {Path.GetFileNameWithoutExtension(randomSongPath)}");
+
             new MediaPlayer(randomSongPath);
         }
     }
